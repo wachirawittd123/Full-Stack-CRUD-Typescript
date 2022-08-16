@@ -1,4 +1,3 @@
-
 export interface ICookieUser {
     _id: string
     email: string
@@ -7,4 +6,11 @@ export interface ICookieUser {
 
 export interface IDataUser {
     user: ICookieUser
+}
+
+export interface IMenuSider {
+    key: string
+    name: string
+    path: string
+    icon: any
 }

@@ -1,7 +1,7 @@
 import { Layout } from "antd"
 import Head from "next/head"
 import App from 'next/app'
-import { NavbarLayout } from "../components/layout";
+import { NavbarLayout, SiderLayout } from "../components/layout";
 import Cookies from "next-cookies"
 import 'antd/dist/antd.css';
 
@@ -42,9 +42,12 @@ function MyApp({ Component, pageProps, user }): any {
                 <link rel="manifest" href="/static/assets/site.webmanifest" />
             </Head>
             <NavbarLayout user={user} />
-            <Layout.Content style={{ minHeight: "100%", minWidth: "100%", backgroundColor: "#FFF" }}>
-                <Component {...pageProps} />
-            </Layout.Content>
+            <Layout>
+                { user?._id && <SiderLayout user={user} /> }
+                <Layout.Content style={{ minHeight: "100%", minWidth: "100%", backgroundColor: "#FFF", padding: user?._id ? "50px" : "0px" }}>
+                    <Component {...pageProps} />
+                </Layout.Content>
+            </Layout>
         </Layout>
     )
 }
