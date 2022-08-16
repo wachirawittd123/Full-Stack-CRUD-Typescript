@@ -61,20 +61,17 @@ export const authenticate = async (
   res: express.Response,
   next: express.NextFunction
 ) => {
-  if(req.originalUrl === "/camera/camera-feature") {
-    const apikey = req.headers.apikey || ""
-    if(apikey !== "moi-secret") {
-      res.status(407).json({ message: "กรุณากรอก apikey" })
-      next(new Error("กรุณากรอก apikey"))
+  if(req?.cookies?.user) {
+    const user = JSON.parse(req?.cookies?.user)
+    const verify = await authController.verifyToken(user?.token)
+    if (!verify?.authorized) {
+      res.status(401).json({ message: "กรุณาเข้าสู่ระบบ" })
+      next(new Error("กรุณาเข้าสู่ระบบ"))
     }
-    return next()
-  } 
-  const token = req.headers.authorization || ""
-  const verify = await authController.verifyToken(token)
-  if (!verify?.authorized) {
+    req.user = verify.user
+    next()
+  } else {
     res.status(401).json({ message: "กรุณาเข้าสู่ระบบ" })
     next(new Error("กรุณาเข้าสู่ระบบ"))
   }
-  req.user = verify.user
-  next()
 }

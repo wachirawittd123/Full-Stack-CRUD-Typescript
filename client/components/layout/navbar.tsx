@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Menu, Row, notification } from "antd";
+import { Layout, Row, notification } from "antd";
 import styled from "styled-components";
 import { IDataUser } from "../../interface";
 import { useRouter } from "next/router";
@@ -62,6 +62,7 @@ const HeaderStyled = styled(Layout.Header)`
   @media only screen and (max-width: 767px) {
     padding: 0px 20px;
   }
+  width: 100%;
 `
 
 const MenuStyled = styled.div`

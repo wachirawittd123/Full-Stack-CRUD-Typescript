@@ -44,7 +44,7 @@ function MyApp({ Component, pageProps, user }): any {
             <NavbarLayout user={user} />
             <Layout>
                 { user?._id && <SiderLayout user={user} /> }
-                <Layout.Content style={{ minHeight: "100%", minWidth: "100%", backgroundColor: "#FFF", padding: user?._id ? "50px" : "0px" }}>
+                <Layout.Content style={{ backgroundColor: "#FFF", padding: user?._id ? "50px" : "0px" }}>
                     <Component {...pageProps} />
                 </Layout.Content>
             </Layout>
